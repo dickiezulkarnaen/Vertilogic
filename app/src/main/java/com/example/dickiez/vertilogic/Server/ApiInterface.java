@@ -16,6 +16,6 @@ public interface ApiInterface {
     @GET("users")
     Call<List<User>> getUsers();
 
-    @GET("{id}")
-    Call<Company> getCompany();
+    @GET("user{id}")
+    Call<User> getUserId();
 }

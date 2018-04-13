@@ -100,8 +100,7 @@
                 android:id="@+id/txt_subdesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Subdesc"
-                />
+                android:text="Subdesc" />
 
         </LinearLayout>
 
@@ -147,11 +146,26 @@
                         android:id="@+id/txt_zipcode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
+                    <Button
+                        android:id="@+id/btn_map"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:text="View Map"/>
 
                 </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
+
+        <fragment
+            android:layout_marginTop="5dp"
+            xmlns:tools="http://schemas.android.com/tools"
+            tools:context="com.example.dickiez.vertilogic.DetailActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:id="@+id/map_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="350dp" />
+
     </LinearLayout>
 
 </ScrollView>

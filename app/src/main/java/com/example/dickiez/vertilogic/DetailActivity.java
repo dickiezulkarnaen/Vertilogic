@@ -1,11 +1,15 @@
 package com.example.dickiez.vertilogic;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.dickiez.vertilogic.Model.Address;
 import com.example.dickiez.vertilogic.Model.Company;
+import com.example.dickiez.vertilogic.Model.Geo;
 import com.example.dickiez.vertilogic.Model.User;
 import com.google.gson.GsonBuilder;
 
@@ -24,6 +28,9 @@ public class DetailActivity extends AppCompatActivity {
     TextView txtSuite;
     TextView txtCity;
     TextView txtZipcode;
+    TextView txtAsu;
+
+    Button btnMap;
 
     User listUser;
     Company company;
@@ -45,6 +52,7 @@ public class DetailActivity extends AppCompatActivity {
         txtSuite = (TextView)findViewById(R.id.txt_suite);
         txtCity = (TextView)findViewById(R.id.txt_city);
         txtZipcode = (TextView)findViewById(R.id.txt_zipcode);
+        btnMap = (Button)findViewById(R.id.btn_map);
 
         listUser = new GsonBuilder().create()
                 .fromJson(getIntent().getStringExtra("user"), User.class);
@@ -60,10 +68,26 @@ public class DetailActivity extends AppCompatActivity {
         txtCompName.setText(company.getName());
         txtDesc.setText(company.getCatchPhrase());
         txtSubdesc.setText(company.getBs());
+
         txtStreet.setText(address.getStreet());
         txtSuite.setText(address.getSuite());
         txtCity.setText(address.getCity());
         txtZipcode.setText(address.getZipcode());
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Geo data = listUser.getAddress().getGeo();
+                String name = listUser.getCompany().getName();
+                String lat = data.getLat();
+                String lng = data.getLng();
+
+                Intent intent = new Intent(DetailActivity.this, MapsActivity.class);
+                intent.putExtra("name", name);
+                intent.putExtra("lat", lat);
+                intent.putExtra("lng", lng);
+                startActivity(intent);
+            }
+        });
 
     }
 }
